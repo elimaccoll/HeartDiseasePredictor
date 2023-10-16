@@ -1,0 +1,67 @@
+[
+  {
+    "id": "logreg",
+    "model": "Logistic Regression",
+    "accuracy": 0.8777173913043478,
+    "recall": 0.9014778325123153,
+    "precision": 0.8798076923076923,
+    "confusion_matrix": {
+      "true_neg": 37.77,
+      "false_pos": 7.07,
+      "false_neg": 5.71,
+      "true_pos": 49.46
+    }
+  },
+  {
+    "id": "svc",
+    "model": "Support Vector Classifier",
+    "accuracy": 0.8695652173913043,
+    "recall": 0.8916256157635468,
+    "precision": 0.8743961352657005,
+    "confusion_matrix": {
+      "true_neg": 36.14,
+      "false_pos": 8.7,
+      "false_neg": 5.98,
+      "true_pos": 49.18
+    }
+  },
+  {
+    "id": "dtc",
+    "model": "Decision Tree Classifier",
+    "accuracy": 0.8369565217391305,
+    "recall": 0.8768472906403941,
+    "precision": 0.8356807511737089,
+    "confusion_matrix": {
+      "true_neg": 36.68,
+      "false_pos": 8.15,
+      "false_neg": 8.42,
+      "true_pos": 46.74
+    }
+  },
+  {
+    "id": "rfc",
+    "model": "Random Forest Classifier",
+    "accuracy": 0.8722826086956522,
+    "recall": 0.9064039408866995,
+    "precision": 0.8679245283018868,
+    "confusion_matrix": {
+      "true_neg": 36.41,
+      "false_pos": 8.42,
+      "false_neg": 5.98,
+      "true_pos": 49.18
+    }
+  },
+  {
+    "id": "knc",
+    "model": "K Neighbors Classifier",
+    "accuracy": 0.717391304347826,
+    "recall": 0.7536945812807881,
+    "precision": 0.7391304347826086,
+    "confusion_matrix": {
+      "true_neg": 33.7,
+      "false_pos": 11.14,
+      "false_neg": 7.88,
+      "true_pos": 47.28
+    }
+  }
+]

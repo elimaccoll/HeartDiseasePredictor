@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/bootstrap.min.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+    <!-- <link rel="stylesheet" href="bootstrap.min.css" />
+    <link rel="stylesheet" href="style.css" /> -->
+
+    <title>&lt;3</title>
+  </head>
+  <body>
+    <div class="container bg-primary p-0 min-vh-100">
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg navbar-light bg-light border">
+        <button
+          class="navbar-toggler mx-3"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav text-center">
+            <li class="nav-item active">
+              <a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="model">Model</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="about">About</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <section id="hero" class="mt-2">
+        <div class="row m-0">
+          <div class="text-center px-5 pt-3">
+            <h2 class="text-dark">Heart Disease Predictor</h2>
+            <p class="text-black rounded p-1 hero-text">
+              Cardiovascular diseases are the number 1 cause of death globally, 
+              accounting for 31% of all deaths worldwide.  Heart failure is a 
+              common event caused by cardiovasular diseases.  This website visualizes
+              heart disease data with respect to (wrt) certain features.  We used these features 
+              to train and implement a basic predictive model in order to classify whether an individual is prone to heart
+              disease depending on the information they input.  The user data is then plotted alongside 
+              the visualizations of the dataset (highlighted in red) to give an idea of how someone with those
+              characteristics compares to existing data records.
+            </p>
+          </div>
+        </div>
+      </section>
+      <section id="visualizations" class="mt-2">
+        <div class="text-center">
+          <!-- <h2 class="text-black">Visualizations</h2> -->
+        </div>
+        <div class="row m-0 p-0">
+          <div class="overflow-auto d-flex align-items-center text-center py-3">
+            <div class="col-md-6 col-xl-4 col-12"">
+              <div id="sex-chart" class="rounded"></div>
+            </div>
+            <div class="col-md-6 col-xl-4 col-12"">
+              <div id="age-chart" class="rounded"></div>
+            </div>
+            <div class="col-md-6 col-xl-4 col-12"">
+              <div id="fastingbs-chart" class="rounded"></div>
+            </div>
+            <div class="col-md-6 col-xl-4 col-12">
+              <div id="chestpain-chart" class="rounded"></div>
+            </div>
+            <div class="col-md-6 col-xl-4 col-12">
+              <div id="exerciseangina-chart" class="rounded"></div>
+            </div>
+            <div class="col-md-6 col-xl-4 col-12">
+              <div id="oldpeak-chart" class="rounded"></div>
+            </div>
+            <div class="col-md-6 col-xl-4 col-12">
+              <div id="stslope-chart" class="rounded"></div>
+            </div>
+            <div class="col-md-6 col-xl-4 col-12">
+              <div id="maxhr-chart" class="rounded"></div>
+            </div>
+            <div class="col-md-6 col-xl-4 col-12">
+              <div id="cholesterol-chart" class="rounded"></div>
+            </div>
+          </div>
+          <!-- </div> -->
+        </div>
+      </section>
+      <section id="results" class="px-5 py-2 d-none">
+        <!-- <div class="text-center"><h3 class="text-light">Results</h3></div> -->
+        <div class="row">
+          <div class="col-lg-6 col-12">
+            <ul class="list-group border">
+              <li class="list-group-item border">
+                <span>Sex:</span>
+                <span id="sex-value"></span>
+              </li>
+              <li class="list-group-item border">
+                <span>Age:</span>
+                <span id="age-value"></span>
+              </li>
+              <li class="list-group-item border">
+                <span>Fasting BS:</span>
+                <span id="fastingbs-value"></span>
+              </li>
+              <li class="list-group-item border">
+                <span>Chest Pain Type:</span>
+                <span id="chestpaintype-value"></span>
+              </li>
+              <li class="list-group-item border">
+                <span>Exercise Angina:</span>
+                <span id="exerciseangina-value"></span>
+              </li>
+              <li class="list-group-item border">
+                <span>Oldpeak:</span>
+                <span id="oldpeak-value"></span>
+              </li>
+              <li class="list-group-item border">
+                <span>ST Slope:</span>
+                <span id="stslope-value"></span>
+              </li>
+              <li class="list-group-item border">
+                <span>Cholesterol:</span>
+                <span id="cholesterol-value"></span>
+              </li>
+              <li class="list-group-item border">
+                <span>Max HR:</span>
+                <span id="maxhr-value"></span>
+              </li>
+            </ul>
+          </div>
+          <div class="col-lg-6 col-12 mt-lg-0 mt-3">
+            <div class="text-center">
+              <div class="card border-dark mb-3">
+                <div class="card-header">
+                  <h4 class="m-0 text-dark">
+                    Prediction: <span id="prediction-value"></span>
+                  </h4>
+                </div>
+                <div class="card-body">
+                  <p class="card-text text-dark" id="prediction-content">
+                    This prediction result simply indicates that based on the
+                    existing data visualized above that an individual with the data
+                    points entered below may be prone to heart disease. Keep in mind, this is a very
+                    simplistic model and there are many other contributing factors that
+                    we can't understand with certainty.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="user-data" class="mt-2 px-5 py-2">
+        <div class="text-center">
+          <h2 class="text-dark">User Data</h2>
+        </div>
+        <div class="row">
+          <!-- <div class="text-center"><h2>User Info</h2></div> -->
+          <div class="col-md-6 col-12 mb-3">
+            <form method="POST" autocomplete="off">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <label class="input-group-text" for="sexSelect"> Sex </label>
+                </div>
+                <select class="custom-select" id="sexSelect" name="sex">
+                  <option selected hidden>Choose...</option>
+                  <option value="1">M</option>
+                  <option value="0">F</option>
+                </select>
+              </div>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">Age</div>
+                </div>
+                <input
+                  type="number"
+                  min="0"
+                  class="form-control"
+                  aria-label="Age"
+                  name="age"
+                  placeholder="Age (years)"
+                />
+              </div>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">Max HR</div>
+                </div>
+                <input
+                  type="number"
+                  min="0"
+                  class="form-control"
+                  aria-label="MaxHR"
+                  name="maxHR"
+                  placeholder="Max Heart Rate (BPM)"
+                />
+                <div class="input-group-append">
+                  <span class="input-group-text info-btn active" data-index="0">
+                    <i class="fa fa-info-circle"></i>
+                  </span>
+                </div>
+              </div>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <label class="input-group-text" for="fastingbsSelect">
+                    Fasting BS
+                  </label>
+                </div>
+                <select
+                  class="custom-select"
+                  id="fastingbsSelect"
+                  name="fastingBS"
+                >
+                  <option selected hidden>Choose...</option>
+                  <option value="1">Y</option>
+                  <option value="0">N</option>
+                </select>
+                <div class="input-group-append">
+                  <span class="input-group-text info-btn" data-index="1">
+                    <i class="fa fa-info-circle"></i>
+                  </span>
+                </div>
+              </div>
+
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <label class="input-group-text" for="chestpaintypeSelect">
+                    Chest Pain Type
+                  </label>
+                </div>
+                <select
+                  class="custom-select"
+                  id="chestpaintypeSelect"
+                  name="chestPainType"
+                >
+                  <option selected hidden>Choose...</option>
+                  <option value="0">ATA</option>
+                  <option value="1">NAP</option>
+                  <option value="2">ASY</option>
+                  <option value="3">TA</option>
+                </select>
+                <div class="input-group-append">
+                  <span class="input-group-text info-btn" data-index="2">
+                    <i class="fa fa-info-circle"></i>
+                  </span>
+                </div>
+              </div>
+
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <label class="input-group-text" for="exerciseanginaSelect">
+                    Exercise Angina
+                  </label>
+                </div>
+                <select
+                  class="custom-select"
+                  id="exerciseanginaSelect"
+                  name="exerciseAngina"
+                >
+                  <option selected hidden>Choose...</option>
+                  <option value="1">Y</option>
+                  <option value="0">N</option>
+                </select>
+                <div class="input-group-append">
+                  <span class="input-group-text info-btn" data-index="3">
+                    <i class="fa fa-info-circle"></i>
+                  </span>
+                </div>
+              </div>
+
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">Oldpeak</div>
+                </div>
+                <input
+                  type="text"
+                  class="form-control"
+                  aria-label="Oldpeak"
+                  placeholder="Oldpeak (mm)"
+                  name="oldpeak"
+                />
+                <div class="input-group-append">
+                  <span class="input-group-text info-btn" data-index="4">
+                    <i class="fa fa-info-circle"></i>
+                  </span>
+                </div>
+              </div>
+
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <label class="input-group-text" for="stslopeSelect">
+                    ST Slope
+                  </label>
+                </div>
+                <select class="custom-select" id="stslopeSelect" name="stSlope">
+                  <option selected hidden>Choose...</option>
+                  <option value="0">Up</option>
+                  <option value="1">Flat</option>
+                  <option value="2">Down</option>
+                </select>
+                <div class="input-group-append">
+                  <span class="input-group-text info-btn" data-index="5">
+                    <i class="fa fa-info-circle"></i>
+                  </span>
+                </div>
+              </div>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">Cholesterol</div>
+                </div>
+                <input
+                  type="number"
+                  min="0"
+                  class="form-control"
+                  aria-label="Cholesterol"
+                  name="cholesterol"
+                  placeholder="Serum Cholesterol (mm/dl)"
+                />
+                <div class="input-group-append">
+                  <span class="input-group-text info-btn" data-index="6">
+                    <i class="fa fa-info-circle"></i>
+                  </span>
+                </div>
+              </div>
+              <div class="text-center">
+                <button
+                  type="submit"
+                  class="btn btn-dark w-50"
+                  id="user-submit-btn"
+                >
+                  Submit
+                </button>
+              </div>
+            </form>
+          </div>
+          <div class="col-md-6 col-12">
+            <div id="info-panel" class="text-center">
+              <div id="maxhr-info" class="card border-dark mb-3">
+                <div class="card-header">
+                  <h4 class="m-0 text-dark">Max Heart Rate</h4>
+                </div>
+                <div class="card-body">
+                  <p class="card-text text-dark">
+                    Maximum heart rate refers to the highest number of times the heart 
+                    can beat per minute during physical activity or exercise. It is a 
+                    measure of the heart's ability to perform work and is influenced by
+                    factors such as age, sex, fitness level, and genetics. 
+                  </p>
+                </div>
+              </div>
+              <div id="fastingbs-info" class="card border-dark mb-3 d-none">
+                <div class="card-header">
+                  <h4 class="m-0 text-dark">Fasting Blood Sugar</h4>
+                </div>
+                <div class="card-body">
+                  <p class="card-text text-dark">
+                    Fasting blood sugar is a term used to describe the elvel of glucose
+                    in the blood after a fast, typically 8-12 hours.  The typical fasting 
+                    blood sugar level is between 70-99mg/dL (milligrams per deciliter).  Levels
+                    outside this range are considered a "Y" otherwise "N" when entering user data.
+                  </p>
+                </div>
+              </div>
+              <div id="chestpain-info" class="card border-dark mb-3 d-none">
+                <div class="card-header">
+                  <h4 class="m-0 text-dark">Chest Pain Types</h4>
+                </div>
+                <ul class="card-body list-group p-2 gap-1">
+                  <li class="list-group-item border">
+                    <strong>Typical Angina - TA</strong><br>
+                    This is a type of chest pain that is usually caused by a temporary lack 
+                    of oxygen-rich blood to the heart. The pain is typically described as a 
+                    feeling of pressure or tightness in the chest, and it may radiate to the 
+                    left arm, neck, or jaw. The pain usually lasts for a few minutes and is 
+                    relieved by rest or medication.
+                  </li>
+                  <li class="list-group-item border">
+                    <strong>Atypical Angina - ATA</strong><br>
+                    This type of chest pain is similar to typical angina, but it may have
+                    different characteristics. For example, the pain may be less severe, last longer,
+                    or be triggered by different activities than typical angina. It may also be
+                    accompanied by symptoms such as shortness of breath, nausea, or fatigue.
+                  </li>
+                  <li class="list-group-item border">
+                    <strong>Non-Anginal Pain - NAP</strong><br>
+                    This is chest pain that is not caused by a lack of blood flow to the
+                    heart. It may be caused by a variety of other factors, such as musculoskeletal
+                    problems, gastrointestinal issues, or anxiety.
+                  </li>
+                  <li class="list-group-item border">
+                    <strong>Asymptomatic - ASY</strong><br>
+                    This refers to a lack of symptoms, including chest pain. Asymptomatic
+                    individuals may still have underlying cardiovascular disease, but they do not
+                    experience any symptoms at the time.
+                  </li>
+                </ul>
+              </div>
+              <div
+                id="exerciseangina-info"
+                class="card border-dark mb-3 d-none"
+              >
+                <div class="card-header">
+                  <h4 class="m-0 text-dark">Exercise Angina</h4>
+                </div>
+                <div class="card-body text-dark">
+                  Exercise-induced angina, also known as angina pectoris, is chest pain 
+                  or discomfort that occurs during physical activity or exertion. It is 
+                  caused by a temporary lack of oxygen-rich blood flow to the heart due 
+                  to narrowed or blocked coronary arteries. During exercise, the heart 
+                  muscle requires more oxygen to meet the increased demand, and when the 
+                  narrowed or blocked arteries cannot supply enough oxygen, it can cause 
+                  pain or discomfort in the chest. Exercise-induced angina can also be 
+                  accompanied by other symptoms such as shortness of breath, dizziness, 
+                  and nausea. It is a common symptom of coronary artery disease and should 
+                  be evaluated by a healthcare professional to determine the underlying cause 
+                  and appropriate treatment.
+                </div>
+              </div>
+              <div id="oldpeak-info" class="card border-dark mb-3 d-none">
+                <div class="card-header">
+                  <h4 class="m-0 text-dark">Oldpeak</h4>
+                </div>
+                <div class="card-body text-dark">
+                  Oldpeak, also known as ST depression, is a measurement of a particular wave 
+                  on an electrocardiogram (ECG) test that indicates a reduced blood supply to 
+                  the heart. The ST segment is the portion of the ECG that shows the interval 
+                  between the end of the QRS complex and the beginning of the T wave. Normally, 
+                  the ST segment should be flat or slightly elevated, but in cases of reduced 
+                  blood supply to the heart, it can become depressed. The oldpeak or ST depression 
+                  is measured as a numerical value in millimeters below the baseline of the ECG 
+                  tracing. A higher oldpeak value indicates more severe ST depression, which can 
+                  be an indication of a more serious cardiovascular condition. ST depression is 
+                  often used in combination with other diagnostic tests to help evaluate and manage 
+                  patients with suspected or known coronary artery disease.
+                </div>
+              </div>
+              <div id="stslope-info" class="card border-dark mb-3 d-none">
+                <div class="card-header">
+                  <h4 class="m-0 text-dark">ST Slope</h4>
+                </div>
+                <div class="card-body text-dark">
+                  ST_Slope is a measurement of the slope of the peak exercise ST segment on an 
+                  electrocardiogram (ECG) during a stress test. The ST segment is the portion 
+                  of the ECG that shows the interval between the end of the QRS complex and 
+                  the beginning of the T wave, and it reflects the period when the ventricles 
+                  are repolarizing. During exercise, the ST segment may change its slope due 
+                  to changes in the blood supply to the heart. The ST_Slope can be described as 
+                  upsloping, flat, or downsloping. 
+                  <ul class="list-group py-2">
+                    <li class="list-group-item border">                  
+                      An upsloping ST_Slope indicates that the ST segment is gradually moving upward 
+                      during exercise, which is a normal finding. 
+                    </li>
+                    <li class="list-group-item border">
+                      A flat ST_Slope indicates that there is little or no change in the ST segment 
+                      during exercise, which can be a sign of a coronary artery disease. 
+                    </li>
+                    <li class="list-group-item border">
+                      A downsloping ST_Slope indicates that the ST segment is moving downward during exercise, which 
+                      is a more specific indicator of a coronary artery disease. 
+                    </li>
+                  </ul>
+                  The ST_Slope is an 
+                  important indicator of the presence and severity of coronary artery disease, 
+                  and it is often used in combination with other diagnostic tests to evaluate patients 
+                  with suspected or known cardiovascular conditions.
+                </div>
+              </div>
+              <div id="cholesterol-info" class="card border-dark mb-3 d-none">
+                <div class="card-header">
+                  <h4 class="m-0 text-dark">Cholesterol</h4>
+                </div>
+                <div class="card-body text-dark">
+                  Cholesterol is a waxy, fat-like substance that is found in every cell of the body.
+                   It is an essential component of cell membranes and is also involved in the 
+                   production of certain hormones, vitamin D, and bile acids that aid in digestion. 
+                   Cholesterol can be obtained through the diet or produced by the liver. While some 
+                   cholesterol is necessary for proper bodily function, high levels of cholesterol 
+                   in the blood can increase the risk of cardiovascular disease.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/highcharts-more.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+    <script src="{{ url_for('static', filename='js/info.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/chart-data.js') }}" type="module"></script>
+    <script src="{{ url_for('static', filename='js/chart-util.js') }}" type="module"></script>
+    <script src="{{ url_for('static', filename='js/charts.js') }}" type="module"></script>
+    <script src="{{ url_for('static', filename='js/data.js') }}" type="module"></script>
+
+    <!-- <script src="../static/js/info.js"></script>
+    <script src="../static/js/chart-data.js" type="module"></script>
+    <script src="../static/js/chart-util.js" type="module"></script>
+    <script src="../static/js/charts.js" type="module"></script>
+    <script src="../static/js/data.js" type="module"></script> -->
+  </body>
+</html>
